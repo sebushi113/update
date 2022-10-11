@@ -4,4 +4,4 @@ credentials.json
 node_modules
 env.sh
 keys
-/.github
+.github/workflows
