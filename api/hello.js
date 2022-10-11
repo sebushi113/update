@@ -8,12 +8,13 @@
 
 // import * as notify from "../notify";
 // import { sendMessage } from "../notify";
+import { sendMessage } from "./notify";
 const chat_id2 = process.env.chat_id2;
 const message = "hi";
 
 // `/api/hello.js`;
 export default async function hello(req, res) {
-  // await notify.sendMessage(chat_id2, message);
+  await notify.sendMessage(chat_id2, message);
   res.statusCode = 200;
   res.json({ message: "hello" });
 }
