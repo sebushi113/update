@@ -22,7 +22,7 @@ export default async function hello(req, res) {
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   // res.json({ message: "hello" });
-  res.send("message sent");
+  res.send("cpu4 updated");
   // res.json(await sendMessage());
 }
 
