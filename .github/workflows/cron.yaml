@@ -1,7 +1,7 @@
 name: daily-cron
 on:
   schedule:
-    - cron: "11 19 * * *"
+    - cron: "20 19 * * *"
 jobs:
   cron:
     runs-on: ubuntu-latest
@@ -9,6 +9,7 @@ jobs:
       - name: Call our API route
         run: |
           curl --request GET \
-          --url 'https://update-nu.vercel.app/api/hello' \
+          --url 'https://api.vercel.com/v1/integrations/deploy/prj_ZEnIog5fnldbzaq5oYvPhVp3kKdx/rVu92ljk6R' \
 
 # --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'
+# run: curl -X POST -d {} https://<webhook-endpoint-url>
