@@ -19,7 +19,7 @@ export default async function hello(req, res) {
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   // res.json({ message: "hello" });
-  res.sendMessage;
+  res.json(await sendMessage());
 }
 
 // export default async (request, response) => {
