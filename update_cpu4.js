@@ -15,6 +15,7 @@ const cs1a = process.env.cs1a;
 const cs1p = process.env.cs1p;
 const cd3a = process.env.cd3a;
 const cd3p = process.env.cd3p;
+const chat_id2 = process.env.chat_id2;
 
 const privateKeys = [process.env.cs1k, process.env.cd3k];
 const signatureProvider = new JsSignatureProvider(privateKeys);
@@ -361,7 +362,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   }
 }
 
-export async function run() {
+export default async function run() {
   console.log(Date());
   // await cpu4_ub();
   // await claim_voter();
@@ -389,6 +390,7 @@ export async function run() {
 
   console.log(Date());
   console.log("waiting to update tomorrow at 17:0:00...");
+  notify.sendMessage(chat_id2, "cpu4 updated");
 }
 
 run();
