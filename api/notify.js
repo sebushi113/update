@@ -16,13 +16,13 @@ const message = "error: *claim experienced an error*";
 // }
 
 export default function notify(req, res) {
-  const send = bot.telegram.sendMessage(chat_id, error);
+  // const send = bot.telegram.sendMessage(chat_id, error);
 
   // const send = sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ message: "notify" });
-  return res.end(send);
+  // return res.end(send);
 }
 
 // sendMessage(chat_id2, message);
