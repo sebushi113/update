@@ -7,8 +7,8 @@
 // }
 
 // import * as notify from "../notify";
-// const chat_id2 = process.env.chat_id2;
-// const message = "hi";
+const chat_id2 = process.env.chat_id2;
+const message = "hi";
 
 // `/api/hello.js`;
 export default async function hello(req, res) {
