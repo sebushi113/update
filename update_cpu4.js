@@ -389,8 +389,8 @@ export async function run() {
 
 // run();
 
-// console.log("waiting to update at 17:00:00...");
-// cron.schedule("00 17 * * *", run);
+console.log("waiting to update at 17:00:00...");
+cron.schedule("00 17 * * *", run);
 
 /*
 "\x1b[32m%s\x1b[0m", green string & reset
