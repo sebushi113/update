@@ -18,7 +18,8 @@ export default async function hello(req, res) {
   await sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  res.json({ message: "hello" });
+  // res.json({ message: "hello" });
+  res.json(sendMessage);
 }
 
 // export default async (request, response) => {
