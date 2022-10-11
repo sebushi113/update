@@ -10,6 +10,7 @@ import * as notify from "./notify.js";
 import * as http from "http";
 import express from "express";
 import { google } from "googleapis";
+import { sendMessage } from "./notify.js";
 
 const cs1a = process.env.cs1a;
 const cs1p = process.env.cs1p;
@@ -390,7 +391,7 @@ export async function run() {
 
   console.log(Date());
   console.log("waiting to update tomorrow at 17:0:00...");
-  notify.sendMessage(chat_id2, "cpu4 updated with *vercel*");
+  sendMessage(chat_id2, "cpu4 updated with *vercel*");
 }
 
 // run();
