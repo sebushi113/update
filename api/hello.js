@@ -18,7 +18,7 @@ const message = "hello cron test";
 export default async function hello(req, res) {
   // await notify.sendMessage(chat_id2, message);
   await sendMessage(chat_id2, message);
-  await run();
+  // await run();
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   // res.json({ message: "hello" });
