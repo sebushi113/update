@@ -5,7 +5,7 @@ dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
-const message = "error: *claim experienced an error*";
+const message = "testing: *vercel*";
 const error = "error";
 
 export async function sendMessage(chat_id, error) {
@@ -17,12 +17,12 @@ export async function sendMessage(chat_id, error) {
 
 export default function notify(req, res) {
   // const send = bot.telegram.sendMessage(chat_id, error);
-
-  const send = sendMessage(chat_id2, message);
+  sendMessage(chat_id2, message);
+  // const send = sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ message: "notify" });
-  return res.end(send);
+  // return res.end(send);
 }
 
 // sendMessage(chat_id2, message);
