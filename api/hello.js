@@ -7,12 +7,14 @@
 // }
 
 import * as notify from "../notify";
+const chat_id2 = process.env.chat_id2;
+const message = "hi";
 
-`/api/hello.js`;
+// `/api/hello.js`;
 export default async function hello(req, res) {
   res.statusCode = 200;
-  // await notify.sendMessage();
   res.json({ message: "test" });
+  await notify.sendMessage(chat_id2, message);
 }
 
 // export default async (request, response) => {

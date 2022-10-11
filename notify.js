@@ -5,7 +5,7 @@ dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
-const message = "error: *claim experienced an error*";
+// const message = "error: *claim experienced an error*";
 // const error = "error";
 
 export async function sendMessage(chat_id, error) {
@@ -15,7 +15,7 @@ export async function sendMessage(chat_id, error) {
   });
 }
 
-sendMessage(chat_id2, message);
+// sendMessage(chat_id2, message);
 // console.log(sendMessage());
 
 // Enable graceful stop
