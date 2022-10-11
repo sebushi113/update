@@ -15,10 +15,12 @@ export async function sendMessage(chat_id, error) {
   });
 }
 
-export default async function hello(req, res) {
-  // await sendMessage(chat_id2, message);
-  res.statusCode = 200;
-  res.json({ message: "hello" });
+export default function hello(req, res) {
+  sendMessage(chat_id2, message);
+  // res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  // res.json({ message: "hello" });
+  return res.end(stringified);
 }
 
 // sendMessage(chat_id2, message);
