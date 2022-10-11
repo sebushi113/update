@@ -10,7 +10,7 @@
 // import { sendMessage } from "../notify";
 import { sendMessage } from "./notify.js";
 const chat_id2 = process.env.chat_id2;
-const message = "hi";
+const message = "hello";
 
 // `/api/hello.js`;
 export default async function hello(req, res) {
@@ -19,7 +19,7 @@ export default async function hello(req, res) {
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   // res.json({ message: "hello" });
-  res.json(sendMessage);
+  res.sendMessage;
 }
 
 // export default async (request, response) => {
