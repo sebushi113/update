@@ -6,7 +6,7 @@ import * as cron from "node-cron";
 import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
-import * as notify from "./notify.js";
+import * as notify from "./api/notify.js";
 import * as http from "http";
 import express from "express";
 import { google } from "googleapis";
