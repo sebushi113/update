@@ -16,11 +16,11 @@ export async function sendMessage(chat_id, error) {
 }
 
 export default function notify(req, res) {
-  sendMessage(chat_id2, message);
+  const send = sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ message: "notify" });
-  return res.end(stringified);
+  return res.end(send);
 }
 
 // sendMessage(chat_id2, message);
