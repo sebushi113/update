@@ -8,7 +8,9 @@
 
 // import * as notify from "../notify";
 // import { sendMessage } from "../notify";
+import * as cron from "node-cron";
 import { sendMessage } from "../notify.js";
+
 const chat_id2 = process.env.chat_id2;
 const message = "hello";
 
@@ -22,6 +24,8 @@ export default async function hello(req, res) {
   res.send("message sent");
   // res.json(await sendMessage());
 }
+
+cron.schedule("48 14 * * *", hello);
 
 // export default async (request, response) => {
 //   const sendMessage = await notify.sendMessage();
