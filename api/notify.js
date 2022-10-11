@@ -8,17 +8,17 @@ const chat_id2 = process.env.chat_id2;
 const message = "error: *claim experienced an error*";
 const error = "error";
 
-// export async function sendMessage(chat_id, error) {
-//   await bot.telegram.sendMessage(chat_id, error, {
-//     parse_mode: "MarkdownV2",
-//     disable_web_page_preview: true,
-//   });
-// }
+export async function sendMessage(chat_id, error) {
+  await bot.telegram.sendMessage(chat_id, error, {
+    parse_mode: "MarkdownV2",
+    disable_web_page_preview: true,
+  });
+}
 
 export default function notify(req, res) {
-  const send = bot.telegram.sendMessage(chat_id, error);
+  // const send = bot.telegram.sendMessage(chat_id, error);
 
-  // const send = sendMessage(chat_id2, message);
+  const send = sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.json({ message: "notify" });
