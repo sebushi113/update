@@ -6,23 +6,24 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
 const message = "testing: *vercel*";
+const error = "error";
 
-export async function sendMessage(chat_id, message) {
-  await bot.telegram.sendMessage(chat_id, message, {
+export async function sendMessage(chat_id, error) {
+  await bot.telegram.sendMessage(chat_id, error, {
     parse_mode: "MarkdownV2",
     disable_web_page_preview: true,
   });
 }
 
-// export default async function notify(req, res) {
-//   // const send = bot.telegram.sendMessage(chat_id, error);
-//   await sendMessage(chat_id2, message);
-//   // const send = sendMessage(chat_id2, message);
-//   // res.statusCode = 200;
-//   res.setHeader("Content-Type", "application/json");
-//   res.json({ message: "notify" });
-//   // return res.end(send);
-// }
+export default async function notify(req, res) {
+  // const send = bot.telegram.sendMessage(chat_id, error);
+  await sendMessage(chat_id2, message);
+  // const send = sendMessage(chat_id2, message);
+  // res.statusCode = 200;
+  res.setHeader("Content-Type", "application/json");
+  res.json({ message: "notify" });
+  // return res.end(send);
+}
 
 // sendMessage(chat_id2, message);
 // console.log(sendMessage());
