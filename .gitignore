@@ -4,4 +4,3 @@ credentials.json
 node_modules
 env.sh
 keys
-.github/workflows/cron.yaml
