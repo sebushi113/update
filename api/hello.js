@@ -12,9 +12,9 @@ const message = "hi";
 
 // `/api/hello.js`;
 export default async function hello(req, res) {
+  await notify.sendMessage(chat_id2, message);
   res.statusCode = 200;
   res.json({ message: "test" });
-  await notify.sendMessage(chat_id2, message);
 }
 
 // export default async (request, response) => {
