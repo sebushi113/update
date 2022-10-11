@@ -5,7 +5,7 @@ dotenv.config();
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
-// const message = "error: *claim experienced an error*";
+const message = "error: *claim experienced an error*";
 // const error = "error";
 
 export async function sendMessage(chat_id, error) {
@@ -13,6 +13,12 @@ export async function sendMessage(chat_id, error) {
     parse_mode: "MarkdownV2",
     disable_web_page_preview: true,
   });
+}
+
+export default async function hello(req, res) {
+  await sendMessage(chat_id2, message);
+  res.statusCode = 200;
+  res.json({ message: "hello" });
 }
 
 // sendMessage(chat_id2, message);
