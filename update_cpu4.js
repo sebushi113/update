@@ -365,9 +365,9 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
 
 export async function run() {
   console.log(Date());
-  await cpu4_ub();
+  // await cpu4_ub();
   // await claim_voter();
-  await sleep(3000);
+  // await sleep(3000);
 
   // let cs1b = await get_cs1b();
   // console.log("\x1b[33m%s\x1b[0m", "cs1balance | " + cs1b);
