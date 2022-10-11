@@ -43,7 +43,7 @@ function sleep(ms) {
 const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 // await delay(1000) /// waiting 1 second.
 
-async function cpu4_update_balance() {
+async function cpu4_ub() {
   // while (true) {
   try {
     const transaction = await api.transact(
@@ -128,12 +128,12 @@ async function claim_voter() {
   // }
 }
 
-async function get_cs1_balance() {
-  const cs1_wax = await rpc.get_currency_balance("eosio.token", "cs1a", "WAX");
+async function get_cs1b() {
+  const cs1_wax = await rpc.get_currency_balance("eosio.token", cs1a, "WAX");
   return Number(cs1_wax.join(", ").split(" ")[0]);
 }
 
-async function get_cpu4_cs1_deposit() {
+async function get_cpu4_cs1d() {
   try {
     const transaction = await rpc.get_table_rows({
       json: true, // Get the response as json
@@ -154,7 +154,7 @@ async function get_cpu4_cs1_deposit() {
   }
 }
 
-async function get_cpu4_cd3_deposit() {
+async function get_cpu4_cd3d() {
   try {
     const transaction = await rpc.get_table_rows({
       json: true, // Get the response as json
@@ -175,7 +175,7 @@ async function get_cpu4_cd3_deposit() {
   }
 }
 
-async function stake(cs1_balance) {
+async function stake(cs1b) {
   try {
     const transaction = await api.transact(
       {
@@ -193,7 +193,7 @@ async function stake(cs1_balance) {
               from: cs1a,
               receiver: cs1a,
               stake_net_quantity: "0.00000000 WAX",
-              stake_cpu_quantity: cs1_balance + " WAX",
+              stake_cpu_quantity: cs1b + " WAX",
               transfer: false,
             },
           },
@@ -210,7 +210,7 @@ async function stake(cs1_balance) {
   }
 }
 
-async function deposit_cpu4(cs1_balance) {
+async function deposit_cpu4(cs1b) {
   try {
     const transaction = await api.transact(
       {
@@ -227,7 +227,7 @@ async function deposit_cpu4(cs1_balance) {
             data: {
               from: cs1a,
               to: "cpu4",
-              quantity: cs1_balance + " WAX",
+              quantity: cs1b + " WAX",
               memo: "Deposit",
             },
           },
@@ -238,7 +238,7 @@ async function deposit_cpu4(cs1_balance) {
         expireSeconds: 300,
       }
     );
-    console.log("balance staked");
+    console.log("balance deposited");
   } catch (error) {
     console.log(error);
   }
@@ -267,7 +267,7 @@ async function get_cs1_voter_info() {
   }
 }
 
-async function update(cpu4_cs1_deposit, cpu4_cd3_deposit) {
+async function update(cpu4_cs1d, cpu4_cd3d) {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: process.env.keyFile,
@@ -290,11 +290,11 @@ async function update(cpu4_cs1_deposit, cpu4_cd3_deposit) {
           [
             new Date(),
             "",
-            cpu4_cs1_deposit,
+            cpu4_cs1d,
             "=C3-C2-B3",
             "=(C3-C2)/C2",
             "",
-            cpu4_cd3_deposit,
+            cpu4_cd3d,
             "=G3-G2-F3",
             "=(G3-G2)/G2",
           ],
@@ -310,11 +310,32 @@ async function update(cpu4_cs1_deposit, cpu4_cd3_deposit) {
   }
 }
 
-async function append(cpu4_cs1_deposit, cpu4_cd3_deposit, cs1_staked) {
+async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   try {
+    // const auth = new google.auth.GoogleAuth({
+    //   keyFile: process.env.keyFile,
+    //   scopes: "https://www.googleapis.com/auth/spreadsheets",
+    // });
+    // const auth = new GoogleAuth({
     const auth = new google.auth.GoogleAuth({
-      keyFile: process.env.keyFile,
-      scopes: "https://www.googleapis.com/auth/spreadsheets",
+      credentials: {
+        type: process.env.type,
+        project_id: process.env.project_id,
+        private_key_id: process.env.private_key_id,
+        private_key: process.env.private_key,
+        client_email: process.env.client_email,
+        client_id: process.env.client_id,
+        auth_uri: "https://accounts.google.com/o/oauth2/auth",
+        token_uri: "https://oauth2.googleapis.com/token",
+        auth_provider_x509_cert_url:
+          "https://www.googleapis.com/oauth2/v1/certs",
+        client_x509_cert_url: process.env.client_x509_cert_url,
+      },
+      scopes: [
+        // "https://www.googleapis.com/auth/someScopeHere",
+        // "https://www.googleapis.com/auth/someOtherScopeHere",
+        "https://www.googleapis.com/auth/spreadsheets",
+      ],
     });
 
     // Instance of Google Sheets API
@@ -329,23 +350,7 @@ async function append(cpu4_cs1_deposit, cpu4_cd3_deposit, cs1_staked) {
       range: "cpu4!C10",
       valueInputOption: "USER_ENTERED",
       resource: {
-        values: [
-          [
-            new Date(),
-            "",
-            cpu4_cs1_deposit,
-            "",
-            "",
-            "",
-            "",
-            cpu4_cd3_deposit,
-            "",
-            "",
-            "",
-            "",
-            cs1_staked,
-          ],
-        ],
+        values: [[new Date(), "", cpu4_cs1d, "", "", "", "", cpu4_cd3d]],
       },
     });
     console.log("\x1b[32m%s\x1b[0m", "appended spreadsheet successfully!");
@@ -358,39 +363,38 @@ async function append(cpu4_cs1_deposit, cpu4_cd3_deposit, cs1_staked) {
 
 export async function run() {
   console.log(Date());
-  // await cpu4_update_balance();
+  // await cpu4_ub();
   // await claim_voter();
+  // await sleep(3000);
 
-  await sleep(3000);
-  // let cs1_balance = await get_cs1_balance();
-  // console.log("\x1b[33m%s\x1b[0m", "cs1balance | " + cs1_balance);
-  // if (cs1_balance != 0) {
-  //   // await stake(cs1_balance);
-  //   await deposit_cpu4(cs1_balance);
+  // let cs1b = await get_cs1b();
+  // console.log("\x1b[33m%s\x1b[0m", "cs1balance | " + cs1b);
+  // if (cs1b != 0) {
+  //   // await stake(cs1b);
+  //   await deposit_cpu4(cs1b);
   // }
 
-  let cpu4_cs1_deposit = await get_cpu4_cs1_deposit();
-  console.log("\x1b[35m%s\x1b[0m", "cpu4cs1dep | " + cpu4_cs1_deposit);
-  let cpu4_cd3_deposit = await get_cpu4_cd3_deposit();
-  console.log("\x1b[35m%s\x1b[0m", "cpu4cd3dep | " + cpu4_cd3_deposit);
+  let cpu4_cs1d = await get_cpu4_cs1d();
+  console.log("\x1b[35m%s\x1b[0m", "cpu4cs1dep | " + cpu4_cs1d);
+  let cpu4_cd3d = await get_cpu4_cd3d();
+  console.log("\x1b[35m%s\x1b[0m", "cpu4cd3dep | " + cpu4_cd3d);
 
-  await sleep(3000);
+  // await sleep(3000);
+  // let voter = await get_cs1_voter_info();
+  // let cs1_staked = voter.staked;
+  // console.log("\x1b[35m%s\x1b[0m", "cs1_staked | " + cs1_staked);
 
-  let voter = await get_cs1_voter_info();
-  let cs1_staked = voter.staked;
-  console.log("\x1b[35m%s\x1b[0m", "cs1_staked | " + cs1_staked);
-
-  // await update(cpu4_cs1_deposit, cpu4_cd3_deposit);
-  await append(cpu4_cs1_deposit, cpu4_cd3_deposit, cs1_staked);
+  // await update(cpu4_cs1d, cpu4_cd3d);
+  await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
   console.log("waiting to update tomorrow at 17:0:00...");
 }
 
-// run();
+run();
 
-console.log("waiting to update at 17:00:00...");
-cron.schedule("00 17 * * *", run);
+// console.log("waiting to update at 17:00:00...");
+// cron.schedule("00 17 * * *", run);
 
 /*
 "\x1b[32m%s\x1b[0m", green string & reset

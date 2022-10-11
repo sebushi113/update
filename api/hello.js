@@ -8,8 +8,8 @@
 
 // import * as notify from "../notify";
 // import { sendMessage } from "../notify";
-import * as cron from "node-cron";
-import { sendMessage } from "../notify.js";
+// import { sendMessage } from "../notify.js";
+import { run } from "../update_cpu4.js";
 
 const chat_id2 = process.env.chat_id2;
 const message = "hello cron test";
@@ -17,7 +17,8 @@ const message = "hello cron test";
 // `/api/hello.js`;
 export default async function hello(req, res) {
   // await notify.sendMessage(chat_id2, message);
-  await sendMessage(chat_id2, message);
+  // await sendMessage(chat_id2, message);
+  await run();
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   // res.json({ message: "hello" });

@@ -13,3 +13,4 @@ jobs:
 
 # --header 'Authorization: Bearer ${{ secrets.API_SECRET_KEY }}'
 # run: curl -X POST -d {} https://<webhook-endpoint-url>
+# run: curl -X GET -d {} https://api.vercel.com/v1/integrations/deploy/prj_ZEnIog5fnldbzaq5oYvPhVp3kKdx/rVu92ljk6R>

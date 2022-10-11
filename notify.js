@@ -15,15 +15,15 @@ export async function sendMessage(chat_id, error) {
   });
 }
 
-export default async function notify(req, res) {
-  // const send = bot.telegram.sendMessage(chat_id, error);
-  await sendMessage(chat_id2, message);
-  // const send = sendMessage(chat_id2, message);
-  // res.statusCode = 200;
-  res.setHeader("Content-Type", "application/json");
-  res.json({ message: "notify" });
-  // return res.end(send);
-}
+// export default async function notify(req, res) {
+//   // const send = bot.telegram.sendMessage(chat_id, error);
+//   await sendMessage(chat_id2, message);
+//   // const send = sendMessage(chat_id2, message);
+//   // res.statusCode = 200;
+//   res.setHeader("Content-Type", "application/json");
+//   res.json({ message: "notify" });
+//   // return res.end(send);
+// }
 
 // sendMessage(chat_id2, message);
 // console.log(sendMessage());
