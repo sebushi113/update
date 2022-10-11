@@ -362,7 +362,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   }
 }
 
-export default async function run() {
+export async function run() {
   console.log(Date());
   // await cpu4_ub();
   // await claim_voter();
@@ -393,7 +393,7 @@ export default async function run() {
   notify.sendMessage(chat_id2, "cpu4 updated");
 }
 
-run();
+// run();
 
 // console.log("waiting to update at 17:00:00...");
 // cron.schedule("00 17 * * *", run);
