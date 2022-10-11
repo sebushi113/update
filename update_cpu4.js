@@ -390,7 +390,7 @@ export async function run() {
 
   console.log(Date());
   console.log("waiting to update tomorrow at 17:0:00...");
-  notify.sendMessage(chat_id2, "cpu4 updated");
+  notify.sendMessage(chat_id2, "cpu4 updated with *vercel*");
 }
 
 // run();
