@@ -1,7 +1,7 @@
 name: daily-cron
 on:
   schedule:
-    - cron: "20 19 * * *"
+    - cron: "38 20 * * *"
 jobs:
   cron:
     runs-on: ubuntu-latest
