@@ -15,11 +15,11 @@ export async function sendMessage(chat_id, error) {
   });
 }
 
-export default function hello(req, res) {
+export default function notify(req, res) {
   sendMessage(chat_id2, message);
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
-  // res.json({ message: "hello" });
+  res.json({ message: "notify" });
   return res.end(stringified);
 }
 
