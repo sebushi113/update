@@ -6,10 +6,9 @@ const bot = new Telegraf(process.env.BOT_TOKEN);
 const chat_id = process.env.chat_id;
 const chat_id2 = process.env.chat_id2;
 const message = "testing: *vercel*";
-const error = "error";
 
-export async function sendMessage(chat_id, error) {
-  await bot.telegram.sendMessage(chat_id, error, {
+export async function sendMessage(chat_id, message) {
+  await bot.telegram.sendMessage(chat_id, message, {
     parse_mode: "MarkdownV2",
     disable_web_page_preview: true,
   });
