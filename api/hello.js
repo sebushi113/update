@@ -7,7 +7,7 @@
 // }
 
 // import * as notify from "../notify";
-import { sendMessage } from "../notify";
+// import { sendMessage } from "../notify";
 const chat_id2 = process.env.chat_id2;
 const message = "hi";
 
