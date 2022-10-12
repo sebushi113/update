@@ -21,7 +21,6 @@ const chat_id2 = process.env.chat_id2;
 const privateKeys = [process.env.cs1k, process.env.cd3k];
 const signatureProvider = new JsSignatureProvider(privateKeys);
 
-// test
 // endpoints https://wax.eosio.online/endpoints
 // const rpc = new JsonRpc("https://wax.greymass.com/", { fetch });
 const rpc = new JsonRpc("http://wax.api.eosnation.io/", { fetch });
@@ -314,11 +313,6 @@ async function update(cpu4_cs1d, cpu4_cd3d) {
 
 async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   try {
-    // const auth = new google.auth.GoogleAuth({
-    //   keyFile: process.env.keyFile,
-    //   scopes: "https://www.googleapis.com/auth/spreadsheets",
-    // });
-    // const auth = new GoogleAuth({
     const auth = new google.auth.GoogleAuth({
       credentials: {
         type: process.env.type,
@@ -356,6 +350,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
       },
     });
     console.log("\x1b[32m%s\x1b[0m", "appended spreadsheet successfully!");
+    sendMessage(chat_id2, "cpu4 updated from *vercel*");
   } catch (error) {
     console.log(error);
     console.log("ERROR: unable to append to sheet");
@@ -366,68 +361,18 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
 export async function run() {
   console.log(Date());
   // await cpu4_ub();
-  // await claim_voter();
   // await sleep(3000);
-
-  // let cs1b = await get_cs1b();
-  // console.log("\x1b[33m%s\x1b[0m", "cs1balance | " + cs1b);
-  // if (cs1b != 0) {
-  //   // await stake(cs1b);
-  //   await deposit_cpu4(cs1b);
-  // }
 
   let cpu4_cs1d = await get_cpu4_cs1d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cs1dep | " + cpu4_cs1d);
   let cpu4_cd3d = await get_cpu4_cd3d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cd3dep | " + cpu4_cd3d);
 
-  // await sleep(3000);
-  // let voter = await get_cs1_voter_info();
-  // let cs1_staked = voter.staked;
-  // console.log("\x1b[35m%s\x1b[0m", "cs1_staked | " + cs1_staked);
-
   // await update(cpu4_cs1d, cpu4_cd3d);
   await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
   console.log("waiting to update tomorrow at 17:0:00...");
-  sendMessage(chat_id2, "cpu4 updated with *vercel*");
 }
 
 // run();
-
-// console.log("waiting to update at 17:00:00...");
-// cron.schedule("00 17 * * *", run);
-
-/*
-"\x1b[32m%s\x1b[0m", green string & reset
-\x1b[32m  green
-\x1b[0m   reset
-\x1b[31m  red
-
-Reset = "\x1b[0m"
-Bright = "\x1b[1m"
-Dim = "\x1b[2m"
-Underscore = "\x1b[4m"
-Blink = "\x1b[5m"
-Reverse = "\x1b[7m"
-Hidden = "\x1b[8m"
-
-FgBlack = "\x1b[30m"
-FgRed = "\x1b[31m"
-FgGreen = "\x1b[32m"
-FgYellow = "\x1b[33m"
-FgBlue = "\x1b[34m"
-FgMagenta = "\x1b[35m"
-FgCyan = "\x1b[36m"
-FgWhite = "\x1b[37m"
-
-BgBlack = "\x1b[40m"
-BgRed = "\x1b[41m"
-BgGreen = "\x1b[42m"
-BgYellow = "\x1b[43m"
-BgBlue = "\x1b[44m"
-BgMagenta = "\x1b[45m"
-BgCyan = "\x1b[46m"
-BgWhite = "\x1b[47m"
-*/
