@@ -266,7 +266,7 @@ async function get_cs1_voter_info() {
   }
 }
 
-async function update(cpu4_cs1d, cpu4_cd3d) {
+async function update_cpu4(cpu4_cs1d, cpu4_cd3d) {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: process.env.keyFile,
@@ -365,7 +365,7 @@ async function run() {
   let cpu4_cd3d = await get_cpu4_cd3d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cd3dep | " + cpu4_cd3d);
 
-  // await update(cpu4_cs1d, cpu4_cd3d);
+  // await update_cpu4(cpu4_cs1d, cpu4_cd3d);
   await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
@@ -373,7 +373,7 @@ async function run() {
   console.log("waiting to update tomorrow at 17:00...");
 }
 
-export default async function handler(req, res) {
+export default async function update(req, res) {
   await run();
   // res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
