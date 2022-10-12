@@ -350,7 +350,6 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
       },
     });
     console.log("\x1b[32m%s\x1b[0m", "appended spreadsheet successfully!");
-    sendMessage(chat_id2, "cpu4 updated from *vercel*");
   } catch (error) {
     console.log(error);
     console.log("ERROR: unable to append to sheet");
@@ -372,6 +371,7 @@ export async function run() {
   await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
+  sendMessage(chat_id2, "cpu4 updated from *vercel*");
   console.log("waiting to update tomorrow at 17:0:00...");
 }
 
