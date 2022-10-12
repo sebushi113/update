@@ -7,6 +7,8 @@ import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
 // import * as notify from "./notify.js";
+// import * as http from "http";
+// import express from "express";
 import { google } from "googleapis";
 import { sendMessage } from "./notify.js";
 
@@ -266,7 +268,7 @@ async function get_cs1_voter_info() {
   }
 }
 
-async function update_cpu4(cpu4_cs1d, cpu4_cd3d) {
+async function update(cpu4_cs1d, cpu4_cd3d) {
   try {
     const auth = new google.auth.GoogleAuth({
       keyFile: process.env.keyFile,
@@ -331,6 +333,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
         "https://www.googleapis.com/auth/spreadsheets",
       ],
     });
+
     // Instance of Google Sheets API
     const sheets = google.sheets({ version: "v4", auth });
     const spreadsheetId = process.env.spreadsheetId;
@@ -347,7 +350,6 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
       },
     });
     console.log("\x1b[32m%s\x1b[0m", "appended spreadsheet successfully!");
-    sendMessage(chat_id2, "cpu4 updated from *vercel*");
   } catch (error) {
     console.log(error);
     console.log("ERROR: unable to append to sheet");
@@ -355,7 +357,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   }
 }
 
-async function run() {
+export async function run() {
   console.log(Date());
   // await cpu4_ub();
   // await sleep(3000);
@@ -365,17 +367,17 @@ async function run() {
   let cpu4_cd3d = await get_cpu4_cd3d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cd3dep | " + cpu4_cd3d);
 
-  // await update_cpu4(cpu4_cs1d, cpu4_cd3d);
+  // await update(cpu4_cs1d, cpu4_cd3d);
   await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
-  await sendMessage(chat_id2, "cpu4 updated from *vercel*");
-  console.log("waiting to update tomorrow at 17:00...");
+  sendMessage(chat_id2, "cpu4 updated from *vercel*");
+  console.log("waiting to update tomorrow at 17:0:00...");
 }
 
-export default async function update(req, res) {
+export default async function handler(req, res) {
   await run();
-  // res.statusCode = 200;
+  res.statusCode = 200;
   res.setHeader("Content-Type", "application/json");
   res.send("cpu4 updated");
 }
