@@ -10,7 +10,7 @@
 // import { sendMessage } from "../notify";
 import { sendMessage } from "./notify.js";
 // import { run } from "../update_cpu4.js";
-import { run } from "../update_cpu4.js";
+import { run } from "./update_cpu4.js";
 const chat_id2 = process.env.chat_id2;
 const message = "hello cron test";
 
