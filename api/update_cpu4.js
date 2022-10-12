@@ -355,7 +355,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
 export async function run() {
   console.log(Date());
   // await cpu4_ub();
-  // await sleep(3000);
+  await sleep(5000);
 
   let cpu4_cs1d = await get_cpu4_cs1d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cs1dep | " + cpu4_cs1d);

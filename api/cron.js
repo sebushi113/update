@@ -14,12 +14,3 @@ router.get("/api/hello", ensureAuthenticated, async function (req, res) {
     jsMain: "hello.js",
   });
 });
-
-/*
-upstash cron schedule
-curl -XPOST \
-	"https://qstash.upstash.io/v1/publish/https://update-nu.vercel.app/api/update" \
-	-H "Authorization: Bearer ********" \
-	-H "Upstash-Cron: 0 21 * * *"
-
-*/
