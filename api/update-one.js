@@ -369,7 +369,7 @@ export async function run() {
   await append(cpu4_cs1d, cpu4_cd3d);
 
   console.log(Date());
-  sendMessage(chat_id2, "cpu4 updated from *vercel*");
+  await sendMessage(chat_id2, "cpu4 updated from *vercel*");
   console.log("waiting to update tomorrow at 17:00...");
 }
 
