@@ -2,5 +2,4 @@
 .vercel
 credentials.json
 node_modules
-env.sh
-keys
+.unused

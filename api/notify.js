@@ -3,8 +3,6 @@ import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-
 dotenv.config();
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
-const chat_id = process.env.chat_id;
-const chat_id2 = process.env.chat_id2;
 
 export async function sendMessage(chat_id, error) {
   await bot.telegram.sendMessage(chat_id, error, {
@@ -12,25 +10,3 @@ export async function sendMessage(chat_id, error) {
     disable_web_page_preview: true,
   });
 }
-
-// export default async function notify(req, res) {
-//   // const send = bot.telegram.sendMessage(chat_id, error);
-//   await sendMessage(chat_id2, message);
-//   // const send = sendMessage(chat_id2, message);
-//   // res.statusCode = 200;
-//   res.setHeader("Content-Type", "application/json");
-//   res.json({ message: "notify" });
-//   // return res.end(send);
-// }
-
-// sendMessage(chat_id2, message);
-// console.log(sendMessage());
-
-// Enable graceful stop
-// process.once("SIGINT", () => bot.stop("SIGINT"));
-// process.once("SIGTERM", () => bot.stop("SIGTERM"));
-
-// exports.send = send;
-// module.exports = { send };
-// export function sendMessage()
-// export function send()
