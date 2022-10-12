@@ -1,14 +1,9 @@
 import { Api, JsonRpc } from "eosjs";
 import { JsSignatureProvider } from "eosjs/dist/eosjs-jssig.js"; // development only
-// import { JsSignatureProvider } from "eosjs/dist/eosjs-jssig";
 import fetch from "node-fetch";
-// import * as cron from "node-cron";
 import moment from "moment";
 import * as dotenv from "dotenv"; // see https://github.com/motdotla/dotenv#how-do-i-use-dotenv-with-import
 dotenv.config();
-// import * as notify from "./notify.js";
-// import * as http from "http";
-// import express from "express";
 import { google } from "googleapis";
 import { sendMessage } from "./notify.js";
 
@@ -374,5 +369,3 @@ export async function run() {
   sendMessage(chat_id2, "cpu4 updated from *vercel*");
   console.log("waiting to update tomorrow at 17:0:00...");
 }
-
-// run();
