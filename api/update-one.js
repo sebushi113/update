@@ -355,7 +355,7 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
   }
 }
 
-export async function run() {
+async function run() {
   console.log(Date());
   // await cpu4_ub();
   // await sleep(3000);
