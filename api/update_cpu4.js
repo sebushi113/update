@@ -12,6 +12,7 @@ const cs1p = process.env.cs1p;
 const cd3a = process.env.cd3a;
 const cd3p = process.env.cd3p;
 const chat_id2 = process.env.chat_id2;
+const date = "YYYY-MM-DD HH:mm:ss";
 
 const privateKeys = [process.env.cs1k, process.env.cd3k];
 const signatureProvider = new JsSignatureProvider(privateKeys);
@@ -353,7 +354,8 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
 }
 
 export async function run() {
-  console.log(Date());
+  console.time("run");
+  console.log(moment(new Date()).format(date) + " | run started");
   await cpu4_ub();
   await sleep(5000);
 
@@ -365,7 +367,10 @@ export async function run() {
   // await update(cpu4_cs1d, cpu4_cd3d);
   await append(cpu4_cs1d, cpu4_cd3d);
 
-  console.log(Date());
-  sendMessage(chat_id2, "*vercel*\nbalances updated\nappended to cpu4");
-  console.log("waiting to update tomorrow at 17:0:00...");
+  let message = `<b>github action</b>\n\nbalances updated\n<code>cs1d: ${cpu4_cs1d}</code>\n<code>cd3d:  ${cpu4_cd3d}</code>\nappended to cpu4\n\n| <a href="${process.env.cpu4}">cpu4</a> | <a href="${process.env.cs1b}">account</a> |`;
+  await sendMessage(chat_id2, message);
+  console.log(moment(new Date()).format(date) + " | run finished");
+  console.timeEnd("run");
 }
+
+// run();
