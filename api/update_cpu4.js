@@ -18,8 +18,8 @@ const privateKeys = [process.env.cs1k, process.env.cd3k];
 const signatureProvider = new JsSignatureProvider(privateKeys);
 
 // endpoints https://wax.eosio.online/endpoints
-// const rpc = new JsonRpc("https://wax.greymass.com/", { fetch });
-const rpc = new JsonRpc("http://wax.api.eosnation.io/", { fetch });
+const rpc = new JsonRpc("https://wax.greymass.com/", { fetch });
+// const rpc = new JsonRpc("http://wax.api.eosnation.io/", { fetch });
 // const rpc = new JsonRpc("https://wax.eosusa.news/", { fetch });
 const api = new Api({
   rpc: rpc,
@@ -80,7 +80,7 @@ async function cpu4_ub() {
   } catch (error) {
     console.log(error);
     console.log("ERROR: unable to update balances. \nExiting..");
-    process.exit();
+    // process.exit();
   }
 }
 
@@ -354,10 +354,8 @@ async function append(cpu4_cs1d, cpu4_cd3d, cs1_staked) {
 }
 
 export async function run() {
-  console.time("run");
-  console.log(moment(new Date()).format(date) + " | run started");
   await cpu4_ub();
-  await sleep(5000);
+  await sleep(3000);
 
   let cpu4_cs1d = await get_cpu4_cs1d();
   console.log("\x1b[35m%s\x1b[0m", "cpu4cs1dep | " + cpu4_cs1d);
@@ -369,8 +367,6 @@ export async function run() {
 
   let message = `<b>github action</b>\n\nbalances updated\n<code>cs1d: ${cpu4_cs1d}</code>\n<code>cd3d:  ${cpu4_cd3d}</code>\nappended to cpu4\n\n| <a href="${process.env.cpu4}">cpu4</a> | <a href="${process.env.cs1b}">account</a> |`;
   await sendMessage(chat_id2, message);
-  console.log(moment(new Date()).format(date) + " | run finished");
-  console.timeEnd("run");
 }
 
 // run();
